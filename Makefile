@@ -22,7 +22,7 @@
 #
 
 # Top level hierarchy
-prefix = /usr
+prefix = /usr/local
 exec_prefix = ${prefix}
 datarootdir = ${prefix}/share
 # Pathname of directory to install the binary

@@ -2505,17 +2505,6 @@ static void verbose_stats_dump(int sig _U_)
  * add by wiggers */
 static void dump_redis_packet(u_char *user, const struct pcap_pkthdr *h, const u_char *sp)
 {
-
-/* Ethernet addresses are 6 bytes */
-#define ETHER_ADDR_LEN	6
-
-/* Ethernet header */
-struct sniff_ethernet {
-	u_char ether_dhost[ETHER_ADDR_LEN]; /* Destination host address */
-	u_char ether_shost[ETHER_ADDR_LEN]; /* Source host address */
-	u_short ether_type; /* IP? ARP? RARP? etc */
-};
-
 /* IP header */
 struct sniff_ip {
 	u_char ip_vhl;		/* version << 4 | header length >> 2 */
@@ -2538,34 +2527,38 @@ struct sniff_ip {
 #define IPV6_TYPE	0x86DD
 	++packets_captured;
 
-	uint32_t ether_hdr_len = sizeof(struct sniff_ethernet);
+	struct ether_header *ep = (struct ether_header *) sp;
 	struct sniff_ip *ip_hdr;
-	uint16_t *proto_type = (uint16_t *)(sp + 12);
-	const char *addr_buf = NULL;
-	char ip_addr_src[MAXUNUM_IP_ADDR_LENGHT] = "";
-	char ip_addr_dst[MAXUNUM_IP_ADDR_LENGHT] = "";
+	u_short ether_type;
+	u_char *addr_buf = NULL;
+	u_char ip_addr_src[MAXUNUM_IP_ADDR_LENGHT] = "";
+	u_char ip_addr_dst[MAXUNUM_IP_ADDR_LENGHT] = "";
 	uint16_t data_len = 0;
 
-	switch (ntohs(*proto_type)) {
-		case IPV4_TYPE:
+	sp += ETHER_HDRLEN;
+	ether_type = EXTRACT_16BITS(&ep->ether_type);
+
+	switch (ether_type) {
+		case ETHERTYPE_IP:
 		{
-			addr_buf = inet_ntoa(*(struct in_addr *)(sp + ether_hdr_len + 12));
+			addr_buf = inet_ntoa(*(struct in_addr *)(sp + 12));
 			memcpy(ip_addr_src, addr_buf, strlen(addr_buf) + 1);
-			addr_buf = inet_ntoa(*(struct in_addr *)(sp + ether_hdr_len + 16));
+			addr_buf = inet_ntoa(*(struct in_addr *)(sp + 16));
 			memcpy(ip_addr_dst, addr_buf, strlen(addr_buf) + 1);
-			data_len = ntohs(*(uint16_t *)(sp + ether_hdr_len + 2));
+			data_len = ntohs(*(uint16_t *)(sp + 2));
 			break;
 		}
 			
-		case IPV6_TYPE:
+		case ETHERTYPE_IPV6:
 		{
-			data_len = ntohs(*(uint16_t *)(sp + ether_hdr_len + 4));
-			addr_buf = inet_ntop(AF_INET6, (void *)(sp + ether_hdr_len + 8), ip_addr_src, 16);
-			addr_buf = inet_ntop(AF_INET6, (void *)(sp + ether_hdr_len + 24), ip_addr_dst, 16);
+			data_len = ntohs(*(uint16_t *)(sp + 4));
+			addr_buf = inet_ntop(AF_INET6, (void *)(sp + 8), ip_addr_src, 16);
+			addr_buf = inet_ntop(AF_INET6, (void *)(sp + 24), ip_addr_dst, 16);
 			break;
 		}
 
 		default:
+			return;
 			break;
 	}
 

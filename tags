@@ -1106,7 +1106,6 @@ ETHERTYPE_VMAN	ethertype.h	176;"	d
 ETHERTYPE_VPROD	ethertype.h	93;"	d
 ETHER_ADDR_LEN	addrtoname.c	69;"	d	file:
 ETHER_ADDR_LEN	ether.h	41;"	d
-ETHER_ADDR_LEN	tcpdump.c	2510;"	d	file:
 ETHER_HDRLEN	ether.h	58;"	d
 ETYPESTR	print-isakmp.c	742;"	d	file:
 EUNDEF	print-tftp.c	68;"	d	file:
@@ -1924,11 +1923,13 @@ IPTOS_THROUGHPUT	ip.h	75;"	d
 IPTS_FLG	ip.h	131;"	d
 IPTS_OFLW	ip.h	130;"	d
 IPTTLDEC	ip.h	161;"	d
+IPV4_TYPE	tcpdump.c	2526;"	d	file:
 IPV6_ADDR_LEN_BYTES	print-ospf6.c	134;"	d	file:
 IPV6_FLOWINFO_MASK	ip6.h	99;"	d
 IPV6_FLOWLABEL_MASK	ip6.h	100;"	d
 IPV6_RTHDR_TYPE_0	print-rt6.c	63;"	d	file:
 IPV6_RTHDR_TYPE_2	print-rt6.c	66;"	d	file:
+IPV6_TYPE	tcpdump.c	2527;"	d	file:
 IPVERSION	ip.h	43;"	d
 IPX_SKT_DIAGNOSTICS	print-ipx.c	43;"	d	file:
 IPX_SKT_EIGRP	print-ipx.c	45;"	d	file:
@@ -1938,16 +1939,16 @@ IPX_SKT_NWLINK_DGM	print-ipx.c	44;"	d	file:
 IPX_SKT_RIP	print-ipx.c	41;"	d	file:
 IPX_SKT_SAP	print-ipx.c	40;"	d	file:
 IP_DF	ip.h	60;"	d
-IP_DF	tcpdump.c	2527;"	d	file:
+IP_DF	tcpdump.c	2516;"	d	file:
 IP_HL	ip.h	55;"	d
 IP_MAXPACKET	ip.h	69;"	d
 IP_MF	ip.h	61;"	d
-IP_MF	tcpdump.c	2528;"	d	file:
+IP_MF	tcpdump.c	2517;"	d	file:
 IP_MSS	ip.h	163;"	d
 IP_OFFMASK	ip.h	62;"	d
-IP_OFFMASK	tcpdump.c	2529;"	d	file:
+IP_OFFMASK	tcpdump.c	2518;"	d	file:
 IP_RES	print-ip.c	305;"	d	file:
-IP_RF	tcpdump.c	2526;"	d	file:
+IP_RF	tcpdump.c	2515;"	d	file:
 IP_V	ip.h	54;"	d
 IQUERY	nameser.h	91;"	d
 ISAKMP_FLAG_C	print-isakmp.c	119;"	d	file:
@@ -3107,7 +3108,7 @@ MAXINITIATORS	print-isakmp.c	647;"	d	file:
 MAXLABEL	nameser.h	67;"	d
 MAXTAGPRINT	print-pppoe.c	84;"	d	file:
 MAXTTL	ip.h	158;"	d
-MAXUNUM_IP_ADDR_LENGHT	tcpdump.c	2536;"	d	file:
+MAXUNUM_IP_ADDR_LENGHT	tcpdump.c	2525;"	d	file:
 MAX_MCS_INDEX	print-802_11.c	725;"	d	file:
 MAX_RST_DATA_LEN	print-tcp.c	68;"	d	file:
 MAX_TLV	print-forces.c	59;"	d	file:
@@ -9777,7 +9778,7 @@ pr_id	print-wb.c	/^        uint32_t pr_id;           \/* source id of drawops to
 pr_page	print-wb.c	/^        struct PageID pr_page;           \/* page of drawops *\/$/;"	m	struct:pkt_rreq	typeref:struct:pkt_rreq::PageID	file:
 pr_sseq	print-wb.c	/^        uint32_t pr_sseq;         \/* start seqno *\/$/;"	m	struct:pkt_rreq	file:
 precision	print-ntp.c	/^	int precision:8;$/;"	m	struct:ntpdata	file:
-prefix	Makefile	/^prefix = \/usr$/;"	m
+prefix	Makefile	/^prefix = \/usr\/local$/;"	m
 prefix	print-isoclns.c	/^    uint8_t prefix[4];$/;"	m	struct:isis_tlv_ip_reach	file:
 prefix	print-lspping.c	/^    uint8_t prefix [16];$/;"	m	struct:lspping_tlv_targetfec_subtlv_bgp_ipv6_t	file:
 prefix	print-lspping.c	/^    uint8_t prefix [16];$/;"	m	struct:lspping_tlv_targetfec_subtlv_l3vpn_ipv6_t	file:
@@ -11264,7 +11265,6 @@ version	print-slow.c	/^    uint8_t version;$/;"	m	struct:slow_common_header_t	fi
 version	print-vqp.c	/^    uint8_t version;$/;"	m	struct:vqp_common_header_t	file:
 version	print-zephyr.c	/^    char *version;$/;"	m	struct:z_packet	file:
 version	tcpdump.c	/^	char version[]="current-git.tcpdump.org";$/;"	v
-version	version.c	/^const char version[] = "4.6.2";$/;"	v
 version_diag	print-bfd.c	/^    uint8_t version_diag;$/;"	m	struct:bfd_header_t	file:
 version_flags	print-rsvp.c	/^    uint8_t version_flags;$/;"	m	struct:rsvp_common_header	file:
 version_res	print-lmp.c	/^    uint8_t version_res[2];$/;"	m	struct:lmp_common_header	file:
