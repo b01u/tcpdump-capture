@@ -42,19 +42,19 @@ CC = gcc
 AR = ar
 MKDEP = 
 PROG = tcpdump
-CCOPT =  -ffloat-store -O0 -g
-INCLS = -I. -I../libpcap-1.6.2  -I./missing
+CCOPT =  -ffloat-store -g -O0
+INCLS = -I. -I/usr/local/include  -I./missing
 DEFS = -DHAVE_CONFIG_H  -I./missing  -D_U_="__attribute__((unused))"
 
 # Standard CFLAGS
-CFLAGS = -DINET6 -O0 -g
+CFLAGS = -DINET6 -g -O0
 FULL_CFLAGS = $(CCOPT) $(DEFS) $(INCLS) $(CFLAGS)
 
 # Standard LDFLAGS
 LDFLAGS = 
 
 # Standard LIBS
-LIBS = ../libpcap-1.6.2/libpcap.a  -lhiredis
+LIBS = -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lpcap -lhiredis
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -353,7 +353,7 @@ TEST_DIST= `find tests \( -name 'DIFF' -prune \) -o \( -name NEW -prune \) -o -t
 
 all: $(PROG) $(LIBNETDISSECT)
 
-$(PROG): $(OBJ) ../libpcap-1.6.2/libpcap.a
+$(PROG): $(OBJ) 
 	@rm -f $@
 	$(CC) $(FULL_CFLAGS) $(LDFLAGS) -o $@ $(OBJ) $(LIBS)
 

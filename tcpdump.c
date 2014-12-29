@@ -105,6 +105,7 @@ extern int SIZE_BUF;
 #include "ether.h"
 #include "ethertype.h"
 #include "extract.h"
+#include "ip6.h"
 
 #ifndef PATH_MAX
 #define PATH_MAX 1024
@@ -2510,68 +2511,111 @@ static void verbose_stats_dump(int sig _U_)
  * add by wiggers */
 static void dump_redis_packet(u_char *user, const struct pcap_pkthdr *h, const u_char *sp)
 {
-#if 0
-/* IP header */
-struct sniff_ip {
-	u_char ip_vhl;		/* version << 4 | header length >> 2 */
-	u_char ip_tos;		/* type of service */
-	u_short ip_len;		/* total length */
-	u_short ip_id;		/* identification */
-	u_short ip_off;		/* fragment offset field */
-#define IP_RF 0x8000		/* reserved fragment flag */
-#define IP_DF 0x4000		/* dont fragment flag */
-#define IP_MF 0x2000		/* more fragments flag */
-#define IP_OFFMASK 0x1fff	/* mask for fragmenting bits */
-	u_char ip_ttl;		/* time to live */
-	u_char ip_p;		/* protocol */
-	u_short ip_sum;		/* checksum */
-	struct in_addr ip_src,ip_dst; /* source and dest address */
-};
-#endif
-
 #define MAXUNUM_IP_ADDR_LENGHT	128
 	++packets_captured;
 
-	struct ether_header *ep = (struct ether_header *) sp;
-	struct ip *ip_hdr;
+	struct ether_header *ep;
+	u_int orig_length;
 	u_short ether_type;
+	u_short extracted_ether_type;
+	u_int length;
+	u_int caplen;
+	u_int ip_len;
 	const u_char *addr_buf = NULL;
-	u_char ip_addr_src[MAXUNUM_IP_ADDR_LENGHT] = "";
-	u_char ip_addr_dst[MAXUNUM_IP_ADDR_LENGHT] = "";
-	uint16_t data_len = 0;
+	u_char ip_addr_src[INET6_ADDRSTRLEN] = "";
+	u_char ip_addr_dst[INET6_ADDRSTRLEN] = "";
 
+	if (caplen < ETHER_HDRLEN || length < ETHER_HDRLEN)
+		return;
+
+	orig_length = length;
+
+	length -= ETHER_HDRLEN;
+	caplen -= ETHER_HDRLEN;
+	ep = (struct ether_header *)sp;
 	sp += ETHER_HDRLEN;
+
 	ether_type = EXTRACT_16BITS(&ep->ether_type);
 
 	switch (ether_type) {
 		case ETHERTYPE_IP:
 		{
-			addr_buf = inet_ntoa(*(struct in_addr *)(sp + 12));
+			const struct ip *ip;
+			u_int hlen;
+			ip = (const struct ip *) sp;
+			if (IP_V(ip) != 4)
+				return;
+			if (length < sizeof(struct ip))
+				return;
+
+			hlen = IP_HL(ip) * 4;
+			if (hlen < sizeof(struct ip))
+				return;
+
+			ip_len = EXTRACT_16BITS(&ip->ip_len);
+			if (length < ip_len)
+				return;
+
+			ip_len -= hlen;
+			addr_buf = inet_ntoa(ip->ip_src);
 			memcpy(ip_addr_src, addr_buf, strlen(addr_buf) + 1);
-			addr_buf = inet_ntoa(*(struct in_addr *)(sp + 16));
+			addr_buf = inet_ntoa(ip->ip_dst);
 			memcpy(ip_addr_dst, addr_buf, strlen(addr_buf) + 1);
-			data_len = EXTRACT_16BITS(sp + 2);
+
 			break;
 		}
-			
 		case ETHERTYPE_IPV6:
 		{
-			return;
-			data_len = EXTRACT_16BITS(sp + 4);
-			addr_buf = inet_ntop(AF_INET6, (void *)(sp + 8), ip_addr_src, 16);
-			addr_buf = inet_ntop(AF_INET6, (void *)(sp + 24), ip_addr_dst, 16);
+			register const struct ip6_hdr *ip6;
+			register int advance;
+			u_int len;
+			const u_char *ipend;
+			register const u_char *cp;
+			register u_int payload_len;
+			int nh;
+			int fragmented = 0;
+			u_int flow;
+
+			ip6 = (const struct ip6_hdr *)sp;
+
+			if (length < sizeof(struct ip6_hdr))
+				return;
+
+			if (IP6_VERSION(ip6) != 6)
+				return;
+
+			payload_len = EXTRACT_16BITS(&ip6->ip6_plen);
+			len = payload_len + sizeof(struct ip6_hdr);
+			if (length < len)
+				return;
+
+			cp = (const u_char *)ip6;
+			advance = sizeof(struct ip6_hdr);
+
+			union {
+				struct in6_addr addr;
+				struct for_hash_addr {
+					char fill[14];
+					uint16_t d;
+				} addra;
+			} addr;
+
+			memcpy(&addr, &ip6->ip6_src, sizeof(addr));
+			cp = inet_ntop(AF_INET6, &addr, ip_addr_src, sizeof(ip_addr_src));
+			memcpy(&addr, &ip6->ip6_src, sizeof(addr));
+			cp = inet_ntop(AF_INET6, &addr, ip_addr_dst, sizeof(ip_addr_dst));
+			//TODO
+			ip_len = caplen;
 			break;
 		}
-
 		default:
 			return;
 			break;
 	}
 
-
 	redisContext *c = gndo->ndo_c;
 
-	redisReply *r = redisCommand(c, "INCRBY %s,%s %u", ip_addr_src, ip_addr_dst, data_len);
+	redisReply *r = redisCommand(c, "INCRBY %s,%s %u", ip_addr_src, ip_addr_dst, ip_len);
 	if (r == NULL)
 		error("execute redis command failed.\n");
 

@@ -406,10 +406,10 @@ BT_HDRLEN	print-bt.c	33;"	d	file:
 BUFSIZE	addrtoname.h	31;"	d
 B_APPND	print-forces.c	252;"	d	file:
 B_BEARER	atmuni31.h	68;"	d
-B_FLAG	tcpdump.c	598;"	d	file:
-B_FLAG	tcpdump.c	601;"	d	file:
-B_FLAG_USAGE	tcpdump.c	599;"	d	file:
-B_FLAG_USAGE	tcpdump.c	602;"	d	file:
+B_FLAG	tcpdump.c	603;"	d	file:
+B_FLAG	tcpdump.c	606;"	d	file:
+B_FLAG_USAGE	tcpdump.c	604;"	d	file:
+B_FLAG_USAGE	tcpdump.c	607;"	d	file:
 B_FULLD	print-forces.c	248;"	d	file:
 B_HIGHER	atmuni31.h	67;"	d
 B_KEYIN	print-forces.c	251;"	d	file:
@@ -880,8 +880,8 @@ DVMRP_NF_TUNNEL	print-dvmrp.c	51;"	d	file:
 DVMRP_PROBE	print-dvmrp.c	37;"	d	file:
 DVMRP_PRUNE	print-dvmrp.c	44;"	d	file:
 DVMRP_REPORT	print-dvmrp.c	38;"	d	file:
-D_FLAG	tcpdump.c	628;"	d	file:
-D_FLAG	tcpdump.c	630;"	d	file:
+D_FLAG	tcpdump.c	633;"	d	file:
+D_FLAG	tcpdump.c	635;"	d	file:
 D_PREFIX	missing/getopt_long.c	77;"	d	file:
 Dflag	tcpdump.c	/^static int Dflag;			\/* list available devices and exit *\/$/;"	v	file:
 EACCESS	print-tftp.c	70;"	d	file:
@@ -1390,7 +1390,7 @@ HAVE_PCAP_DATALINK_VAL_TO_DESCRIPTION	config.h	105;"	d
 HAVE_PCAP_DUMP_FLUSH	config.h	111;"	d
 HAVE_PCAP_DUMP_FTELL	config.h	114;"	d
 HAVE_PCAP_FINDALLDEVS	config.h	117;"	d
-HAVE_PCAP_FINDALLDEVS	tcpdump.c	623;"	d	file:
+HAVE_PCAP_FINDALLDEVS	tcpdump.c	628;"	d	file:
 HAVE_PCAP_FREE_DATALINKS	config.h	120;"	d
 HAVE_PCAP_IF_T	config.h	123;"	d
 HAVE_PCAP_LIB_VERSION	config.h	126;"	d
@@ -1923,13 +1923,11 @@ IPTOS_THROUGHPUT	ip.h	75;"	d
 IPTS_FLG	ip.h	131;"	d
 IPTS_OFLW	ip.h	130;"	d
 IPTTLDEC	ip.h	161;"	d
-IPV4_TYPE	tcpdump.c	2526;"	d	file:
 IPV6_ADDR_LEN_BYTES	print-ospf6.c	134;"	d	file:
 IPV6_FLOWINFO_MASK	ip6.h	99;"	d
 IPV6_FLOWLABEL_MASK	ip6.h	100;"	d
 IPV6_RTHDR_TYPE_0	print-rt6.c	63;"	d	file:
 IPV6_RTHDR_TYPE_2	print-rt6.c	66;"	d	file:
-IPV6_TYPE	tcpdump.c	2527;"	d	file:
 IPVERSION	ip.h	43;"	d
 IPX_SKT_DIAGNOSTICS	print-ipx.c	43;"	d	file:
 IPX_SKT_EIGRP	print-ipx.c	45;"	d	file:
@@ -1939,16 +1937,12 @@ IPX_SKT_NWLINK_DGM	print-ipx.c	44;"	d	file:
 IPX_SKT_RIP	print-ipx.c	41;"	d	file:
 IPX_SKT_SAP	print-ipx.c	40;"	d	file:
 IP_DF	ip.h	60;"	d
-IP_DF	tcpdump.c	2516;"	d	file:
 IP_HL	ip.h	55;"	d
 IP_MAXPACKET	ip.h	69;"	d
 IP_MF	ip.h	61;"	d
-IP_MF	tcpdump.c	2517;"	d	file:
 IP_MSS	ip.h	163;"	d
 IP_OFFMASK	ip.h	62;"	d
-IP_OFFMASK	tcpdump.c	2518;"	d	file:
 IP_RES	print-ip.c	305;"	d	file:
-IP_RF	tcpdump.c	2515;"	d	file:
 IP_V	ip.h	54;"	d
 IQUERY	nameser.h	91;"	d
 ISAKMP_FLAG_C	print-isakmp.c	119;"	d	file:
@@ -2185,8 +2179,8 @@ IV2_T_PRF	print-isakmp.c	/^	IV2_T_PRF  = 2,$/;"	e	enum:ikev2_t_type	file:
 IV_IV	print-802_11.c	389;"	d	file:
 IV_KEYID	print-802_11.c	391;"	d	file:
 IV_PAD	print-802_11.c	390;"	d	file:
-I_FLAG	tcpdump.c	606;"	d	file:
-I_FLAG	tcpdump.c	608;"	d	file:
+I_FLAG	tcpdump.c	611;"	d	file:
+I_FLAG	tcpdump.c	613;"	d	file:
 Id	print-snmp.c	/^	const char	**Id;$/;"	m	struct:__anon81	file:
 Iflag	interface.h	203;"	d
 JAN_1970	print-ntp.c	49;"	d	file:
@@ -2349,8 +2343,8 @@ JUNIPER_MGC_NUMBER	print-juniper.c	46;"	d	file:
 JUNIPER_PROTO_IPV4	print-juniper.c	433;"	d	file:
 JUNIPER_PROTO_IPV6	print-juniper.c	434;"	d	file:
 JUNIPER_PROTO_NULL	print-juniper.c	432;"	d	file:
-J_FLAG	tcpdump.c	614;"	d	file:
-J_FLAG	tcpdump.c	618;"	d	file:
+J_FLAG	tcpdump.c	619;"	d	file:
+J_FLAG	tcpdump.c	623;"	d	file:
 Jflag	tcpdump.c	/^static int Jflag;			\/* list available time stamp types *\/$/;"	v	file:
 KANAMEMAX	print-rx.c	64;"	d	file:
 KAUTH_RX_PORT	print-rx.c	55;"	d	file:
@@ -3108,7 +3102,7 @@ MAXINITIATORS	print-isakmp.c	647;"	d	file:
 MAXLABEL	nameser.h	67;"	d
 MAXTAGPRINT	print-pppoe.c	84;"	d	file:
 MAXTTL	ip.h	158;"	d
-MAXUNUM_IP_ADDR_LENGHT	tcpdump.c	2525;"	d	file:
+MAXUNUM_IP_ADDR_LENGHT	tcpdump.c	2513;"	d	file:
 MAX_MCS_INDEX	print-802_11.c	725;"	d	file:
 MAX_RST_DATA_LEN	print-tcp.c	68;"	d	file:
 MAX_TLV	print-forces.c	59;"	d	file:
@@ -4016,11 +4010,11 @@ OPENBSD_AF_INET6	print-pflog.c	85;"	d	file:
 OPENFLOW_PORT_IANA	tcp.h	104;"	d
 OPENFLOW_PORT_OLD	tcp.h	101;"	d
 OPTFLAGS	win32/prj/GNUmakefile	/^OPTFLAGS = -O$/;"	m
-OPTION_REDIS	tcpdump.c	668;"	d	file:
-OPTION_REDIS_HOST	tcpdump.c	669;"	d	file:
-OPTION_REDIS_PORT	tcpdump.c	670;"	d	file:
-OPTION_TSTAMP_PRECISION	tcpdump.c	666;"	d	file:
-OPTION_VERSION	tcpdump.c	665;"	d	file:
+OPTION_REDIS	tcpdump.c	673;"	d	file:
+OPTION_REDIS_HOST	tcpdump.c	674;"	d	file:
+OPTION_REDIS_PORT	tcpdump.c	675;"	d	file:
+OPTION_TSTAMP_PRECISION	tcpdump.c	671;"	d	file:
+OPTION_VERSION	tcpdump.c	670;"	d	file:
 OPTLV_msg	print-forces.c	/^static const struct optlv_h OPTLV_msg[F_OP_MAX + 1] = {$/;"	v	typeref:struct:optlv_h	file:
 OP_MIN	print-forces.c	1505;"	d	file:
 OP_MIN_SIZ	print-forces.c	242;"	d	file:
@@ -4113,7 +4107,7 @@ PARSE_FIELD_INT	print-zephyr.c	152;"	d	file:
 PARSE_FIELD_STR	print-zephyr.c	156;"	d	file:
 PARSE_INT_FORMAT	missing/snprintf.c	268;"	d	file:
 PARSE_STRING	print-zephyr.c	148;"	d	file:
-PATH_MAX	tcpdump.c	105;"	d	file:
+PATH_MAX	tcpdump.c	110;"	d	file:
 PCAP_DIR	win32/prj/GNUmakefile	/^PCAP_DIR = ..\/..\/..\/winpcap$/;"	m
 PD_FDT_I	print-forces.c	/^	PD_FDT_I,$/;"	e	enum:__anon43	file:
 PD_MAX_IND	print-forces.c	514;"	d	file:
@@ -4412,8 +4406,8 @@ Q2931	atmuni31.h	73;"	d
 QFIXEDSZ	nameser.h	69;"	d
 QOS_PARA	atmuni31.h	66;"	d
 QUERY	nameser.h	90;"	d
-Q_FLAG	tcpdump.c	640;"	d	file:
-Q_FLAG	tcpdump.c	642;"	d	file:
+Q_FLAG	tcpdump.c	645;"	d	file:
+Q_FLAG	tcpdump.c	647;"	d	file:
 Qflag	tcpdump.c	/^int Qflag = -1;				\/* restrict captured packet by send\/receive direction *\/$/;"	v
 RADCMD_ACCESS_ACC	print-radius.c	74;"	d	file:
 RADCMD_ACCESS_CHA	print-radius.c	78;"	d	file:
@@ -4828,8 +4822,8 @@ SGQ_OACK	print-decnet.c	306;"	d	file:
 SGQ_ONAK	print-decnet.c	307;"	d	file:
 SGQ_OTHER	print-decnet.c	309;"	d	file:
 SHA	print-arp.c	93;"	d	file:
-SIGNAL_REQ_INFO	tcpdump.c	109;"	d	file:
-SIGNAL_REQ_INFO	tcpdump.c	111;"	d	file:
+SIGNAL_REQ_INFO	tcpdump.c	114;"	d	file:
+SIGNAL_REQ_INFO	tcpdump.c	116;"	d	file:
 SIGNATURE_INVALID	signature.h	23;"	d
 SIGNATURE_VALID	signature.h	22;"	d
 SIG_CATCH	lbl/os-sunos4.h	208;"	d
@@ -5671,8 +5665,8 @@ USES_APPLE_RST	tcpdump-stdinc.h	335;"	d
 USES_APPLE_RST	tcpdump-stdinc.h	338;"	d
 USE_ETHER_NTOHOST	config.h	294;"	d
 USE_IPSECDOI_IN_PHASE1	print-isakmp.c	1313;"	d	file:
-U_FLAG	tcpdump.c	634;"	d	file:
-U_FLAG	tcpdump.c	636;"	d	file:
+U_FLAG	tcpdump.c	639;"	d	file:
+U_FLAG	tcpdump.c	641;"	d	file:
 Uflag	interface.h	194;"	d
 Universal	print-snmp.c	/^static const char *Universal[] = {$/;"	v	file:
 V2TRAP	print-snmp.c	141;"	d	file:
@@ -8203,10 +8197,10 @@ its_otime	print-icmp.c	/^			uint32_t its_otime;$/;"	m	struct:icmp::__anon47::id_
 its_rtime	print-icmp.c	/^			uint32_t its_rtime;$/;"	m	struct:icmp::__anon47::id_ts	file:
 its_ttime	print-icmp.c	/^			uint32_t its_ttime;$/;"	m	struct:icmp::__anon47::id_ts	file:
 ivlen	print-esp.c	/^	int		ivlen;$/;"	m	struct:sa_list	file:
-j_FLAG	tcpdump.c	612;"	d	file:
-j_FLAG	tcpdump.c	616;"	d	file:
-j_FLAG_USAGE	tcpdump.c	613;"	d	file:
-j_FLAG_USAGE	tcpdump.c	617;"	d	file:
+j_FLAG	tcpdump.c	617;"	d	file:
+j_FLAG	tcpdump.c	621;"	d	file:
+j_FLAG_USAGE	tcpdump.c	618;"	d	file:
+j_FLAG_USAGE	tcpdump.c	622;"	d	file:
 jflag	interface.h	183;"	d
 jnx_ext_tlv_values	print-juniper.c	/^static const struct tok jnx_ext_tlv_values[] = {$/;"	v	typeref:struct:tok	file:
 jnx_flag_values	print-juniper.c	/^static const struct tok jnx_flag_values[] = {$/;"	v	typeref:struct:tok	file:
