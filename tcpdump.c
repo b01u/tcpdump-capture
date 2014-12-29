@@ -99,7 +99,12 @@ extern int SIZE_BUF;
 #include "gmt2local.h"
 #include "pcap-missing.h"
 
+/* Redis API header file 
+ * add by wiggers */
 #include <hiredis/hiredis.h>
+#include "ether.h"
+#include "ethertype.h"
+#include "extract.h"
 
 #ifndef PATH_MAX
 #define PATH_MAX 1024
@@ -2505,6 +2510,7 @@ static void verbose_stats_dump(int sig _U_)
  * add by wiggers */
 static void dump_redis_packet(u_char *user, const struct pcap_pkthdr *h, const u_char *sp)
 {
+#if 0
 /* IP header */
 struct sniff_ip {
 	u_char ip_vhl;		/* version << 4 | header length >> 2 */
@@ -2521,16 +2527,15 @@ struct sniff_ip {
 	u_short ip_sum;		/* checksum */
 	struct in_addr ip_src,ip_dst; /* source and dest address */
 };
+#endif
 
 #define MAXUNUM_IP_ADDR_LENGHT	128
-#define IPV4_TYPE	0X0800
-#define IPV6_TYPE	0x86DD
 	++packets_captured;
 
 	struct ether_header *ep = (struct ether_header *) sp;
-	struct sniff_ip *ip_hdr;
+	struct ip *ip_hdr;
 	u_short ether_type;
-	u_char *addr_buf = NULL;
+	const u_char *addr_buf = NULL;
 	u_char ip_addr_src[MAXUNUM_IP_ADDR_LENGHT] = "";
 	u_char ip_addr_dst[MAXUNUM_IP_ADDR_LENGHT] = "";
 	uint16_t data_len = 0;
@@ -2545,13 +2550,14 @@ struct sniff_ip {
 			memcpy(ip_addr_src, addr_buf, strlen(addr_buf) + 1);
 			addr_buf = inet_ntoa(*(struct in_addr *)(sp + 16));
 			memcpy(ip_addr_dst, addr_buf, strlen(addr_buf) + 1);
-			data_len = ntohs(*(uint16_t *)(sp + 2));
+			data_len = EXTRACT_16BITS(sp + 2);
 			break;
 		}
 			
 		case ETHERTYPE_IPV6:
 		{
-			data_len = ntohs(*(uint16_t *)(sp + 4));
+			return;
+			data_len = EXTRACT_16BITS(sp + 4);
 			addr_buf = inet_ntop(AF_INET6, (void *)(sp + 8), ip_addr_src, 16);
 			addr_buf = inet_ntop(AF_INET6, (void *)(sp + 24), ip_addr_dst, 16);
 			break;
