@@ -2525,6 +2525,8 @@ static void dump_redis_packet(u_char *user, const struct pcap_pkthdr *h, const u
 	u_char ip_addr_src[INET6_ADDRSTRLEN] = "";
 	u_char ip_addr_dst[INET6_ADDRSTRLEN] = "";
 
+	caplen = h->caplen;
+	length = h->len;
 	if (caplen < ETHER_HDRLEN || length < ETHER_HDRLEN)
 		return;
 
